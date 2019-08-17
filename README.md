@@ -57,7 +57,9 @@ for i := 0; i < 10; i++ {
   break FirstLoop
 }
 ```
-10. Using of continue is the same but it’s can be used only with *for* 
+10. Using of continue is the same but it’s can be used only with *for*
+11. *goto* can move control only within the same function
+12. 
 ### 3. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
