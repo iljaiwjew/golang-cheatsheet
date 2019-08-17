@@ -8,8 +8,8 @@
 5. It’s allowed to assign nil to variable which is a pointer, function, slice, map, channel or interface type
 6. x is assignable to type T if x is an untyped constant representable by a value of type T
 ### 2. Labels and break, continue, goto statements
-1. Labels can be used for goto, break and continue statements
-2. It’s optional for goto and break, continue statements, but required for goto
+1. Labels can be used for *goto*, *break* and *continue* statements
+2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
 ```go
 func main() {
@@ -45,8 +45,8 @@ goto x
 x:
 fmt.Println(x)
 ```
-7. break can be used in select, switch, for statements
-8. continue can be used only in for statement
+7. break can be used in *select*, *switch*, *for* statements
+8. continue can be used only in *for* statement
 9. Label for break statement must be the one associated with enclosing for, switch or select statement. So, It’s impossible to compile:
 ```go
 ///compile error
@@ -74,11 +74,3 @@ type X struct {
    next X
 }
 ```
-
-
-
-
-
-
-
-
