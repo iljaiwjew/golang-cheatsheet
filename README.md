@@ -22,11 +22,11 @@ End:
 ```
 4. Scope doesn’t contain nested functions so it’s illegal to write:
 ```go
-    //compile error
-    func() { 
-       fmt.Println(“Nested function”)
-       goto End
-   }()
+ //compile error
+ func() { 
+    fmt.Println(“Nested function”)
+    goto End
+ }()
 End:
 z```
 5. Labels are not block scoped. So it’s impossible to redeclare label inside nested block:
@@ -41,21 +41,21 @@ X:
 6. Identifiers of the labels live in a separate space so they don’t conflict with i.e. variables identifiers:
 ```go
 x := 1
-   goto x
+goto x
 x:
-   fmt.Println(x)
+fmt.Println(x)
 ```go
 7. break can be used in select, switch, for statements
 8. continue can be used only in for statement
 9. Label for break statement must be the one associated with enclosing for, switch or select statement. So, It’s impossible to compile:
 ```go
-        ///compile error
-       FirstLoop:
-   for i := 0; i < 10; i++ {
-   }
-   for i := 0; i < 10; i++ {
-       break FirstLoop
-   }
+///compile error
+FirstLoop:
+for i := 0; i < 10; i++ {
+}
+for i := 0; i < 10; i++ {
+  break FirstLoop
+}
 ```
 10. Using of continue is the same but it’s can be used only with for 
 ### 3. Other
