@@ -28,7 +28,7 @@ End:
     goto End
  }()
 End:
-z```
+```
 5. Labels are not block scoped. So it’s impossible to redeclare label inside nested block:
 ```go
 //compile error
@@ -44,7 +44,7 @@ x := 1
 goto x
 x:
 fmt.Println(x)
-```go
+```
 7. break can be used in select, switch, for statements
 8. continue can be used only in for statement
 9. Label for break statement must be the one associated with enclosing for, switch or select statement. So, It’s impossible to compile:
@@ -62,7 +62,8 @@ for i := 0; i < 10; i++ {
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
-    // correct type definition
+```go
+// correct type definition
 type X struct {
    name string
    next *X
@@ -71,7 +72,8 @@ type X struct {
 type X struct {
    name string
    next X
-} 
+}
+```
 
 
 
