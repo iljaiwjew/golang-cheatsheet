@@ -37,26 +37,26 @@ func f() {
 7. If S contains an embedded field *T, the method sets of S and *S both include promoted methods with receiver T or *T.
 8. In a method set, each method must have a unique non-blank method name.
 9. A defined type does not inherit any methods bound to the given type, but the method set of an interface type or of elements of a composite type remains unchanged:
-```
+```go
 // A Mutex is a data type with two methods, Lock and Unlock.
-      type Mutex struct         { /* Mutex fields */ }
-      func (m *Mutex) Lock()    { /* Lock implementation */ }
-      func (m *Mutex) Unlock()  { /* Unlock implementation */ }
+type Mutex struct         { /* Mutex fields */ }
+func (m *Mutex) Lock()    { /* Lock implementation */ }
+func (m *Mutex) Unlock()  { /* Unlock implementation */ }
 
-      // NewMutex has the same composition as Mutex but its method set is empty.
-      type NewMutex Mutex
+// NewMutex has the same composition as Mutex but its method set is empty.
+type NewMutex Mutex
 
-     // The method set of PtrMutex's underlying type *Mutex remains unchanged,
-     // but the method set of PtrMutex is empty.
-     type PtrMutex *Mutex
+// The method set of PtrMutex's underlying type *Mutex remains unchanged,
+// but the method set of PtrMutex is empty.
+type PtrMutex *Mutex
 
-     // The method set of *PrintableMutex contains the methods Lock and Unlock bound to its embedded field Mutex.
-     type PrintableMutex struct {
-	Mutex
-    }
+// The method set of *PrintableMutex contains the methods Lock and Unlock bound to its embedded field Mutex.
+type PrintableMutex struct {
+  Mutex
+}
 
-    // MyBlock is an interface type. Therereby has the same method set as Block.
-       type MyBlock Block
+// MyBlock is an interface type. Therereby has the same method set as Block.
+type MyBlock Block
 ```
 ### 4. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
