@@ -25,9 +25,7 @@ func f() {
   x := 2 // it’s ok
 }
 ```
-3. Unlike regular variable declarations, a short variable declaration may redeclare variables that were defined in the same block. There two requirements:
-  > at least one declared variable is new;
-  > redeclared variables must save their types;
+3. Unlike regular variable declarations, a short variable declaration may redeclare variables that were defined in the same block. There two requirements: at least one declared variable is new and redeclared variables must save their types
 4. Redeclaration does not introduce a new variable; it just assigns a new value to the original
 ### 3. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
