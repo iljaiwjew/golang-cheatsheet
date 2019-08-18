@@ -27,7 +27,38 @@ func f() {
 ```
 3. Unlike regular variable declarations, a short variable declaration may redeclare variables that were defined in the same block. There are two requirements: at least one declared variable is new and redeclared variables must save their types
 4. Redeclaration does not introduce a new variable; it just assigns a new value to the original
-### 3. Labels and break, continue, goto statements
+### 3. Method sets
+1. A type may have a method set associated with it
+2. The method set of an interface type is its interface
+3. The method set of any other type T consists of all methods declared with receiver type T
+4. The method set of the corresponding pointer type *T is the set of all methods declared with receiver *T or T - that is, it also contains the method set of T
+5. Promoted methods are included in the method set of the struct. Let we have struct type S and a defined type T. Promoted methods are included in the method set of the struct as in next two rules.
+6. If S contains an embedded field T, the method sets of S and *S both include promoted methods with receiver T. The method set of *S also includes promoted methods with receiver *T.
+7. If S contains an embedded field *T, the method sets of S and *S both include promoted methods with receiver T or *T.
+8. In a method set, each method must have a unique non-blank method name.
+9. A defined type does not inherit any methods bound to the given type, but the method set of an interface type or of elements of a composite type remains unchanged:
+```
+// A Mutex is a data type with two methods, Lock and Unlock.
+      type Mutex struct         { /* Mutex fields */ }
+      func (m *Mutex) Lock()    { /* Lock implementation */ }
+      func (m *Mutex) Unlock()  { /* Unlock implementation */ }
+
+      // NewMutex has the same composition as Mutex but its method set is empty.
+      type NewMutex Mutex
+
+     // The method set of PtrMutex's underlying type *Mutex remains unchanged,
+     // but the method set of PtrMutex is empty.
+     type PtrMutex *Mutex
+
+     // The method set of *PrintableMutex contains the methods Lock and Unlock bound to its embedded field Mutex.
+     type PrintableMutex struct {
+	Mutex
+    }
+
+    // MyBlock is an interface type. Therereby has the same method set as Block.
+       type MyBlock Block
+```
+### 4. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -96,7 +127,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 4. Other
+### 5. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
