@@ -7,7 +7,29 @@
 4. Assigning to interface type T value implementing T
 5. It’s allowed to assign nil to variable which is a pointer, function, slice, map, channel or interface type
 6. x is assignable to type T if x is an untyped constant representable by a value of type T
-### 2. Labels and break, continue, goto statements
+### 2. Declarations
+1. Shadowing - an identifier declared in a block may be redeclared in an inner block. While the identifier of the inner declaration is in scope, it denotes the entity declared by the inner declaration:
+```go
+var x = 0
+if x == 0 {
+ var x = “text”
+ fmt.Println(x) // x == “text”
+}
+fmt.Println(x) // x == 0
+```
+2. Short variable declaration. It can be used only in function body:
+```go
+y := 1 // compile error
+var y = 1 // it’s ok
+func f() {
+  x := 2 // it’s ok
+}
+```
+3. Unlike regular variable declarations, a short variable declaration may redeclare variables that were defined in the same block. There two requirements:
+  - at least one declared variable is new
+  - redeclared variables must save their types
+4. Redeclaration does not introduce a new variable; it just assigns a new value to the original
+### 3. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -76,7 +98,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 3. Other
+### 4. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
