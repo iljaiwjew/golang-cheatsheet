@@ -58,13 +58,22 @@ type PrintableMutex struct {
 // MyBlock is an interface type. Therereby has the same method set as Block.
 type MyBlock Block
 ```
-### 4. Functions
+### 4. Pointers
+1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
+```go
+type Pint *int
+
+var x = 1
+var px *int = &x // type of px is *int. Base type of *int is int
+var mypx Pint = px // type of mypx is Pint. Base type of Pint is also int
+```
+### 5. Functions
 1. A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine:
 ```go
 func flushICache(begin, end uintptr)  // implemented externally
 ```
 2. If the function's signature declares result parameters, the function body's statement list must end in a terminating statement(it’s not only return, see documentation).
-### 5. Labels and break, continue, goto statements
+### 6. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -133,7 +142,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 5. Other
+### 7. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
