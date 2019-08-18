@@ -58,7 +58,13 @@ type PrintableMutex struct {
 // MyBlock is an interface type. Therereby has the same method set as Block.
 type MyBlock Block
 ```
-### 4. Labels and break, continue, goto statements
+### 4. Functions
+1. A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine:
+```go
+func flushICache(begin, end uintptr)  // implemented externally
+```
+2. If the function's signature declares result parameters, the function body's statement list must end in a terminating statement(it’s not only return, see documentation).
+### 5. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
