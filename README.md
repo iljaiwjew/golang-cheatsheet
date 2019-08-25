@@ -28,7 +28,7 @@ func f() {
 3. Unlike regular variable declarations, a short variable declaration may redeclare variables that were defined in the same block. There are two requirements: at least one declared variable is new and redeclared variables must save their types
 4. Redeclaration does not introduce a new variable; it just assigns a new value to the original
 ### 3. Method declarations
-1. Receiver type must be a defined type T or a pointer to a defined type T. T is called the receiver base type
+1. Receiver type must be a defined type T or a pointer to a defined type T. T is called the receiver **base type**
 2. A receiver base type cannot be a pointer or interface type
 3. Receiver base type must be defined in the same package as the method
 4. The method is said to be bound to its receiver base type and the method name is visible only within selectors for type T or *T.
