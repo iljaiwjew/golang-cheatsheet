@@ -27,7 +27,16 @@ func f() {
 ```
 3. Unlike regular variable declarations, a short variable declaration may redeclare variables that were defined in the same block. There are two requirements: at least one declared variable is new and redeclared variables must save their types
 4. Redeclaration does not introduce a new variable; it just assigns a new value to the original
-### 3. Method sets
+### 3. Method declarations
+1. Receiver type must be a defined type T or a pointer to a defined type T. T is called the receiver base type
+2. A receiver base type cannot be a pointer or interface type
+3. Receiver base type must be defined in the same package as the method
+4. The method is said to be bound to its receiver base type and the method name is visible only within selectors for type T or *T.
+5. A non-blank receiver identifier must be unique in the method signature.
+6. If the receiver's value is not referenced inside the body of the method, its identifier may be omitted in the declaration.
+7. For a base type, the non-blank names of methods bound to it must be unique.
+8. If the base type is a struct type, the non-blank method and field names must be distinct.
+### 4. Method sets
 1. A type may have a method set associated with it
 2. The method set of an interface type is its interface
 3. The method set of any other type T consists of all methods declared with receiver type T
@@ -58,7 +67,7 @@ type PrintableMutex struct {
 // MyBlock is an interface type. Therereby has the same method set as Block.
 type MyBlock Block
 ```
-### 4. Pointers
+### 5. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
 type Pint *int
@@ -67,13 +76,13 @@ var x = 1
 var px *int = &x // type of px is *int. Base type of *int is int
 var mypx Pint = px // type of mypx is Pint. Base type of Pint is also int
 ```
-### 5. Functions
+### 6. Functions
 1. A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine:
 ```go
 func flushICache(begin, end uintptr)  // implemented externally
 ```
 2. If the function's signature declares result parameters, the function body's statement list must end in a terminating statement(it’s not only return, see documentation).
-### 6. Labels and break, continue, goto statements
+### 7. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -142,7 +151,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 7. Other
+### 8. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
