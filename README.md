@@ -2,7 +2,7 @@
 
 ### 1. Type assignability
 ```golang
-var y T = x // x type is V
+var y T = x // x's type is V
 ```
 1. V is identical to T
 2. V and T have identical underlying types and at least one of V or T is not a defined type
