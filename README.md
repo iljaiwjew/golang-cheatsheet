@@ -1,6 +1,6 @@
 # golang cheatsheet
 
-### 1. Type assignability // var T y = x where x type is V
+### 1. Type assignability // var y T = x where x type is V
 1. V is identical to T
 2. V and T have identical underlying types and at least one of V or T is not a defined type
 3. With channels you also can make one-direction channel from two-direction channel
