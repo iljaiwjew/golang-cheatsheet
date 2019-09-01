@@ -106,6 +106,11 @@ func makeT() T
 ```go
 f := makeT().Mp   // invalid: result of makeT() is not addressable
 ```
+6. It's alsoe possible to create method values from interface values:
+```go
+var i interface { M(int) } = myVal
+f := i.M; f(7)  // like i.M(7)
+```
 ### 7. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
