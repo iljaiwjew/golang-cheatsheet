@@ -106,7 +106,7 @@ func makeT() T
 ```go
 f := makeT().Mp   // invalid: result of makeT() is not addressable
 ```
-6. It's alsoe possible to create method values from interface values:
+6. It's also possible to create method values from interface values:
 ```go
 var i interface { M(int) } = myVal
 f := i.M; f(7)  // like i.M(7)
