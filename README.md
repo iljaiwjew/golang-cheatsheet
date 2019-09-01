@@ -100,8 +100,8 @@ func makeT() T
 ```
 1. If the expression ```x``` has static type ```T``` and ```M``` is in the method set of type ```T```, ```x.M``` is called a method value. The method value ```x.M``` is a function value that is callable with the same arguments as a method call of ```x.M```. The expression x is evaluated and saved during the evaluation of the method value; the saved value is then used as the receiver in any calls, which may be executed later.
 2. The expression ```t.Mv``` yields a function value of type ```func(int) int```.
-3. The expression ```pt.Mp``` yields a function value of type ```func(float32) float32```. In this case mutation of pt is available
-4. The expression```pt.Mv``` is also legal because ```Mv``` is in method set of ```pt```. In this case the expression will be equivalent to ```(*t).Mp```. 
+3. The expression ```pt.Mp``` yields a function value of type ```func(float32) float32```. In this case mutation of pt is available.
+4. The expression```pt.Mv``` is also legal because ```Mv``` is in method set of ```pt```. In this case the expression will be equivalent to ```(*t).Mv```.
 5. Despite of the fact that ```Mp``` is not in method set of ```T``` the expression ```t.Mp``` is also legal because it will be replaced with ```(&t).Mp```. ```t``` must be addressable, so the following code will not compile: 
 ```go
 f := makeT().Mp   // invalid: result of makeT() is not addressable
