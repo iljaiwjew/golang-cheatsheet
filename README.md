@@ -86,7 +86,21 @@ var t T
 4. The expression ```(*T).Mv``` yields a function value representing Mv with signature ```func(tv *T, a int) int```. But behind the scenes go dereference ```tv``` and pass the obtained value to the underlying method. So, you cannot mutate ```tv``` anyway.
 5. The expression ```T.Mp``` is illegal and yelds compilation error mecause ```Mp``` is not in method set of ```T```
 6. It is legal to derive a function value from a method of an interface type. The resulting function takes an explicit receiver of that interface type.
-### 6. Pointers
+### 6. Method values
+```go
+type T struct {
+	a int
+}
+func (tv  T) Mv(a int) int         { return 0 }  // value receiver
+func (tp *T) Mp(f float32) float32 { return 1 }  // pointer receiver
+
+var t T
+var pt *T
+func makeT() T
+```
+1. If the expression x has static type T and M is in the method set of type T, x.M is called a method value. The method value x.M is a function value that is callable with the same arguments as a method call of x.M. The expression x is evaluated and saved during the evaluation of the method value; the saved value is then used as the receiver in any calls, which may be executed later.
+
+### 7. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
 type Pint *int
@@ -95,13 +109,13 @@ var x = 1
 var px *int = &x // type of px is *int. Base type of *int is int
 var mypx Pint = px // type of mypx is Pint. Base type of Pint is also int
 ```
-### 7. Functions
+### 8. Functions
 1. A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine:
 ```go
 func flushICache(begin, end uintptr)  // implemented externally
 ```
 2. If the function's signature declares result parameters, the function body's statement list must end in a terminating statement(it’s not only return, see documentation).
-### 8. Labels and break, continue, goto statements
+### 9. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -170,7 +184,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 9. Other
+### 10. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
