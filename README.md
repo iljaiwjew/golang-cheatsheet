@@ -84,7 +84,8 @@ var t T
 2. The expression ```T.Mv``` yields a function equivalent to Mv but with an explicit receiver as its first argument; it has signature ```func(tv T, a int) int```
 3. The expression ```(*T).Mp``` yields a function value representing Mp with signature ```func(tp *T, f float32) float32```. Mutation of ```tp``` can be performed.
 4. The expression ```(*T).Mv``` yields a function value representing Mv with signature ```func(tv *T, a int) int```. But behind the scenes go dereference ```tv``` and pass the obtained value to the underlying method. So, you cannot mutate ```tv``` anyway.
-
+5. The expression ```T.Mp``` is illegal and yelds compilation error mecause ```Mp``` is not in method set of ```T```
+6. It is legal to derive a function value from a method of an interface type. The resulting function takes an explicit receiver of that interface type.
 ### 6. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
