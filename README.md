@@ -83,7 +83,7 @@ var t T
 1. If M is in the method set of type T, T.M is a function that is callable as a regular function with the same arguments as M prefixed by an additional argument that is the receiver of the method.
 2. The expression ```T.Mv``` yields a function equivalent to Mv but with an explicit receiver as its first argument; it has signature ```func(tv T, a int) int```
 3. The expression ```(*T).Mp``` yields a function value representing Mp with signature ```func(tp *T, f float32) float32```. Mutation of ```tp``` can be performed.
-4. The expression ```(*T).Mv``` yields a function value representing Mv with signature ```func(tv *T, a int) int```. But behind the scenes go dereference ```tv``` and pass the obtained value to the underlying method. So, you cannot mutate ```tv``` anyway
+4. The expression ```(*T).Mv``` yields a function value representing Mv with signature ```func(tv *T, a int) int```. But behind the scenes go dereference ```tv``` and pass the obtained value to the underlying method. So, you cannot mutate ```tv``` anyway.
 
 ### 6. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
