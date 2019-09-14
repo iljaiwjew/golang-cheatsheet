@@ -40,7 +40,7 @@ func f() {
 3. Receiver base type must be defined in the same package as the method
 4. The method is said to be bound to its receiver base type and the method name is visible only within selectors for type T or *T.
 5. For a base type, the non-blank names of methods bound to it must be unique.
-6. If the base type is a struct type, the non-blank method and field names must be distinct.
+6. If the base type is a struct type, the non-blank method names and field names must be distinct.
 7. A non-blank receiver identifier must be unique in the method signature.
 8. If the receiver's value is not referenced inside the body of the method, its identifier may be omitted in the declaration.
 ### 4. Method sets
