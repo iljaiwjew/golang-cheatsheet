@@ -5,7 +5,7 @@
 var y T = x // x's type is V
 ```
 1. V is identical to T
-2. V and T have identical underlying types and at least one of V or T is not a defined type
+2. V and T have identical underlying types and at least one of V or T is not a defined type(boolean, all numeric and string are defined types) 
 3. With channels you also can make one-direction channel from two-direction channel
 4. Assigning to interface type T value implementing T
 5. It’s allowed to assign nil to variable which is a pointer, function, slice, map, channel or interface type
