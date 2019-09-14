@@ -75,7 +75,7 @@ type MyBlock Block
 x.f // (1), of type T 
 ```
 1. For a primary expression (1) that is not a package name, the selector expression
-denotes the field of the value ```x``` or method from method set of type ```T```.
+denotes the field of the value ```x``` or method from method set of type ```T```. if x was of type *T it would be the same syntax for selecting fields from x.
 2. A selector f may denote a field or method f from the method set of type T. The number of embedded fields traversed to reach f is called its depth in T. The depth of a field or method f declared in T is zero. The depth of a field or method f declared in an embedded field A in T is the depth of f in A plus one.
 3. For a value x of type ```T``` ```x.f``` denotes the field or method at the shallowest depth in ```T``` where there is such an f. If there is not exactly one f with shallowest depth, the selector expression is illegal.
 4. For a value x of type ```I``` where ```I``` is an interface type, ```x.f``` denotes the actual method with name ```f``` of the dynamic value of ```x```. If there is no method with name ```f``` in the method set of ```I```, the selector expression is illegal.
