@@ -70,7 +70,20 @@ type PrintableMutex struct {
 // MyBlock is an interface type. Therereby has the same method set as Block.
 type MyBlock Block
 ```
-### 5. Method expressions
+### 5. Selectors
+```go
+x.f // (1)
+```
+1. For a primary expression x that is not a package name, the selector expression
+denotes the field or method f of the value x.
+2. A selector f may denote a field or method f of a type T, or it may refer to a field or method f of a nested embedded field of T. The number of embedded fields traversed to reach f is called its depth in T. The depth of a field or method f declared in T is zero. The depth of a field or method f declared in an embedded field A in T is the depth of f in A plus one.
+3. For a value x of type T or *T where T is not a pointer or interface type, x.f denotes the field or method at the shallowest depth in T where there is such an f. If there is not exactly one f with shallowest depth, the selector expression is illegal.
+4. For a value x of type I where I is an interface type, x.f denotes the actual method with name f of the dynamic value of x. If there is no method with name f in the method set of I, the selector expression is illegal.
+5. As an exception, if the type of x is a defined pointer type and (*x).f is a valid selector expression denoting a field (but not a method), x.f is shorthand for (*x).f.
+6. In all other cases, x.f is illegal.
+7. If x is of pointer type and has the value nil and x.f denotes a struct field, assigning to or evaluating x.f causes a run-time panic.
+8. If x is of interface type and has the value nil, calling or evaluating the method x.f causes a run-time panic.
+### 6. Method expressions
 ```go
 type T struct {
 	a int
@@ -86,7 +99,7 @@ var t T
 4. The expression ```(*T).Mv``` yields a function value representing Mv with signature ```func(tv *T, a int) int```. But behind the scenes go dereference ```tv``` and pass the obtained value to the underlying method. So, you cannot mutate ```tv``` anyway.
 5. The expression ```T.Mp``` is illegal and yelds compilation error mecause ```Mp``` is not in method set of ```T```
 6. It is legal to derive a function value from a method of an interface type. The resulting function takes an explicit receiver of that interface type.
-### 6. Method values
+### 7. Method values
 ```go
 type T struct {
 	a int
@@ -111,7 +124,7 @@ f := makeT().Mp   // invalid: result of makeT() is not addressable
 var i interface { M(int) } = myVal
 f := i.M; f(7)  // like i.M(7)
 ```
-### 7. Pointers
+### 8. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
 type Pint *int
@@ -120,13 +133,13 @@ var x = 1
 var px *int = &x // type of px is *int. Base type of *int is int
 var mypx Pint = px // type of mypx is Pint. Base type of Pint is also int
 ```
-### 8. Functions
+### 9. Functions
 1. A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine:
 ```go
 func flushICache(begin, end uintptr)  // implemented externally
 ```
 2. If the function's signature declares result parameters, the function body's statement list must end in a terminating statement(it’s not only return, see documentation).
-### 9. Labels and break, continue, goto statements
+### 10. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -195,7 +208,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 10. Other
+### 11. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
