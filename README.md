@@ -72,17 +72,17 @@ type MyBlock Block
 ```
 ### 5. Selectors
 ```go
-x.f // (1)
+x.f // (1), of type T 
 ```
-1. For a primary expression x that is not a package name, the selector expression
-denotes the field or method f of the value x.
-2. A selector f may denote a field or method f of a type T, or it may refer to a field or method f of a nested embedded field of T. The number of embedded fields traversed to reach f is called its depth in T. The depth of a field or method f declared in T is zero. The depth of a field or method f declared in an embedded field A in T is the depth of f in A plus one.
-3. For a value x of type T or *T where T is not a pointer or interface type, x.f denotes the field or method at the shallowest depth in T where there is such an f. If there is not exactly one f with shallowest depth, the selector expression is illegal.
-4. For a value x of type I where I is an interface type, x.f denotes the actual method with name f of the dynamic value of x. If there is no method with name f in the method set of I, the selector expression is illegal.
-5. As an exception, if the type of x is a defined pointer type and (*x).f is a valid selector expression denoting a field (but not a method), x.f is shorthand for (*x).f.
-6. In all other cases, x.f is illegal.
-7. If x is of pointer type and has the value nil and x.f denotes a struct field, assigning to or evaluating x.f causes a run-time panic.
-8. If x is of interface type and has the value nil, calling or evaluating the method x.f causes a run-time panic.
+1. For a primary expression ```x``` that is not a package name, the selector expression
+denotes the field of the value ```x``` or method from method set of type ```T```.
+2. A selector f may denote a field or method f from the method set of type T. The number of embedded fields traversed to reach f is called its depth in T. The depth of a field or method f declared in T is zero. The depth of a field or method f declared in an embedded field A in T is the depth of f in A plus one.
+3. For a value x of type ```T``` ```x.f``` denotes the field or method at the shallowest depth in ```T``` where there is such an f. If there is not exactly one f with shallowest depth, the selector expression is illegal.
+4. For a value x of type ```I``` where ```I``` is an interface type, ```x.f``` denotes the actual method with name ```f``` of the dynamic value of ```x```. If there is no method with name ```f``` in the method set of ```I```, the selector expression is illegal.
+5. As an exception, if the type of ```x``` is a defined pointer type and ```(*x).f``` is a valid selector expression denoting a field (but not a method), ```x.f``` is shorthand for ```(*x).f```.
+6. In all other cases, ```x.f``` is illegal.
+7. If ```x``` is of pointer type and has the value ```nil``` and ```x.f``` denotes a struct field, assigning to or evaluating ```x.f``` causes a run-time panic.
+8. If ```x``` is of interface type and has the value ```nil```, calling or evaluating the method ```x.f``` causes a run-time panic.
 ### 6. Method expressions
 ```go
 type T struct {
