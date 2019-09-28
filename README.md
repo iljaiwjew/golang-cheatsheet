@@ -12,7 +12,7 @@ var y T = x // x's type is V
 2. V and T have identical underlying types and at least one of V or T is not a defined type 
 3. With channels you also can make one-direction channel from two-direction channel
 4. Assigning to interface type T value implementing T
-5. It’s allowed to assign nil to variable which is a pointer, function, slice, map, channel or interface type
+5. It’s allowed to assign nil to variable which is a pointer, function, slice, map, channel or interface
 6. x is assignable to type T if x is an untyped constant representable by a value of type T
 ### 2. Declarations
 1. Shadowing - an identifier declared in a block may be redeclared in an inner block. While the identifier of the inner declaration is in scope, it denotes the entity declared by the inner declaration:
@@ -128,7 +128,20 @@ f := makeT().Mp   // invalid: result of makeT() is not addressable
 var i interface { M(int) } = myVal
 f := i.M; f(7)  // like i.M(7)
 ```
-### 8. Pointers
+### 8. Interfaces
+1. Default value for interface value is ```nil```
+2. Besides having static type what is interface type itself, every interface value has dynamic type and dynamic value. It's a type of a value that is assigned to the given interface value. If interface value is nil, dynamic type is ```nil``` as well as dynamic value is ```nil```. Note that it's possible to have non-nil interface value with ```nil``` dynamic value:
+```golang
+var i I; // some interface type
+var v V = nil // some user-defined type that implements I
+i = v // from now i has dynamic type V and dynamic value nil. Note that this is not the same that having i == nil
+```
+3. Go has special empty interface type:
+```golang
+ interface {}
+```
+Empty interface is automatically satisfied by any type.So, value of any type can be assigned to such interface variable
+### 9. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
 type Pint *int
@@ -137,13 +150,13 @@ var x = 1
 var px *int = &x // type of px is *int. Base type of *int is int
 var mypx Pint = px // type of mypx is Pint. Base type of Pint is also int
 ```
-### 9. Functions
+### 10. Functions
 1. A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine:
 ```go
 func flushICache(begin, end uintptr)  // implemented externally
 ```
 2. If the function's signature declares result parameters, the function body's statement list must end in a terminating statement(it’s not only return, see documentation).
-### 10. Labels and break, continue, goto statements
+### 11. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -212,7 +225,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 11. Other
+### 12. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
