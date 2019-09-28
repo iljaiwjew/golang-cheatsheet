@@ -130,6 +130,20 @@ f := i.M; f(7)  // like i.M(7)
 ```
 ### 8. Interfaces
 1. Types implement interfaces implicitly
+2. Interface value gives access only to methods of its interface type:
+```golang
+type I interface {
+    M1()
+}
+type T int64
+func (T) M1() {}
+func (T) M2() {}
+func main() {
+    var i I = T(10)
+    i.M1()
+    i.M2() // i.M2 undefined (type I has no field or method M2)
+}
+```
 2. Default value for interfaces is ```nil```
 3. Besides having static type what is interface type itself, every interface value has dynamic type and dynamic value. It's a type of a value that is assigned to the given interface value. If interface value is nil, dynamic type is ```nil``` as well as dynamic value is ```nil```. Note that it's possible to have non-nil interface value with ```nil``` dynamic value:
 ```golang
