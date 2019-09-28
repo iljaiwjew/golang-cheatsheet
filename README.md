@@ -169,6 +169,7 @@ type J interface {
 }
 ```
 6. Circular embedding of interfaces is disallowed and will be detected while compilation
+7. In case of embedding interface that includes non-exported methods, embracing interface will include non-exported methods.
 ### 9. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
