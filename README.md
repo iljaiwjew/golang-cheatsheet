@@ -147,8 +147,8 @@ func main() {
 2. Default value for interfaces is ```nil```
 3. Besides having static type what is interface type itself, every interface value has dynamic type and dynamic value. It's a type of a value that is assigned to the given interface value. If interface value is nil, dynamic type is ```nil``` as well as dynamic value is ```nil```. Note that it's possible to have non-nil interface value with ```nil``` dynamic value:
 ```golang
-var i I; // some interface type
-var v V = nil // some user-defined type that implements I
+var i I // some interface type
+var v V // some user-defined type that implements I
 i = v // from now i has dynamic type V and dynamic value nil. Note that this is not the same that having i == nil
 ```
 4. Go has special empty interface type:
