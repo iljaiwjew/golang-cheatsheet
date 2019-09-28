@@ -142,6 +142,19 @@ i = v // from now i has dynamic type V and dynamic value nil. Note that this is 
  interface {}
 ```
 Empty interface is automatically implemented by any type. So, value of any type can be assigned to such interface variable
+5. It’s allowed to embedded other interfaces — either defined in the same package or imported:
+```golang
+import "fmt"
+type I interface {
+     m1()
+}
+type J interface {
+    m2()
+    I
+    fmt.Stringer
+}
+```
+6. Circular embedding of interfaces is disallowed and will be detected while compilation
 ### 9. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
