@@ -140,7 +140,7 @@ i = v // from now i has dynamic type V and dynamic value nil. Note that this is 
 ```golang
  interface {}
 ```
-Empty interface is automatically satisfied by any type.So, value of any type can be assigned to such interface variable
+Empty interface is automatically implemented by any type. So, value of any type can be assigned to such interface variable
 ### 9. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
