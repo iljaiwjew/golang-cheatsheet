@@ -129,7 +129,7 @@ var i interface { M(int) } = myVal
 f := i.M; f(7)  // like i.M(7)
 ```
 ### 8. Interfaces
-1. Default value for interface value is ```nil```
+1. Default value for interfaces is ```nil```
 2. Besides having static type what is interface type itself, every interface value has dynamic type and dynamic value. It's a type of a value that is assigned to the given interface value. If interface value is nil, dynamic type is ```nil``` as well as dynamic value is ```nil```. Note that it's possible to have non-nil interface value with ```nil``` dynamic value:
 ```golang
 var i I; // some interface type
