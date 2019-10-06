@@ -174,7 +174,7 @@ type J interface {
 ```golang
 x.(T)
 ```
-1. For an expression x of interface type and a type T, the primary expression ```x.(T)``` asserts that x is not nil and that the value stored in ```x``` is of type ```T````. The notation ```x.(T)``` is called a type assertion.
+1. For an expression x of interface type and a type T, the primary expression ```x.(T)``` asserts that x is not nil and that the value stored in ```x``` is of type ```T```. The notation ```x.(T)``` is called a type assertion.
 ### 10. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
