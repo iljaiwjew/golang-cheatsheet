@@ -171,6 +171,8 @@ type J interface {
 6. Circular embedding of interfaces is disallowed and will be detected while compilation
 7. In case of embedding interface from other package that includes non-exported methods, embracing interface will include non-exported methods.
 ### 9. Type assertion
+```x.(T)```
+1. For an expression x of interface type and a type T, the primary expression ```x.(T)``` asserts that x is not nil and that the value stored in ```x``` is of type ```T````. The notation ```x.(T)``` is called a type assertion.
 ### 10. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
