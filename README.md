@@ -175,10 +175,10 @@ type J interface {
 x.(T) // x is of type I
 ```
 1. For an expression x of interface type and a type T, the primary expression ```x.(T)``` asserts that x is not nil and that the value stored in ```x``` is of type ```T```. The notation ```x.(T)``` is called a type assertion.
-2. If ```I``` is not interface the expression is invalid.
-3. If ```T``` is not interface type and ```T``` doesn't implement I the expression is invalid.
-4. If ```T``` is not interface type and dynamic value from ```x``` is identical to T, result is value of type ```T```.
-5. If ```T``` is interface type and dynamic value of x implements T, result is value of type ```T```.
+2. If ```I``` is not interface type the expression is invalid.
+3. If ```T``` is not interface type and ```T``` doesn't implement ```I``` the expression is invalid.
+4. If ```T``` is not interface type and dynamic value from ```x``` is identical to ```T```, result is value of type ```T```.
+5. If ```T``` is interface type and dynamic value of x implements ```T```, result is value of type ```T```.
 6. In every other case run-time error occurs(e.g. if ```x``` is ```nil``` interface value run-time error occurs)
 
 6. If 
