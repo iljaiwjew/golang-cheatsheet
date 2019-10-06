@@ -196,6 +196,10 @@ var mypx Pint = px // type of mypx is Pint. Base type of Pint is also int
 func flushICache(begin, end uintptr)  // implemented externally
 ```
 2. If the function's signature declares result parameters, the function body's statement list must end in a terminating statement(it’s not only return, see documentation).
+3. The final incoming parameter in a function signature may have a type prefixed with .... A function with such a parameter is called variadic and may be invoked with zero or more arguments for that parameter:
+```golang
+func(a, b int, z float64, opt ...interface{}) (success bool)
+```
 ### 12. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
