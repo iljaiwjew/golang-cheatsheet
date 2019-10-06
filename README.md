@@ -172,9 +172,14 @@ type J interface {
 7. In case of embedding interface from other package that includes non-exported methods, embracing interface will include non-exported methods.
 ### 9. Type assertion
 ```golang
-x.(T)
+x.(T) // x is of type I
 ```
 1. For an expression x of interface type and a type T, the primary expression ```x.(T)``` asserts that x is not nil and that the value stored in ```x``` is of type ```T```. The notation ```x.(T)``` is called a type assertion.
+2. if ```x``` is not interface the expression is invalid.
+3. if ```x``` is ```nil``` interface value run-time error occurs.
+4. If ```T``` is not interface type and dynamic value from ```x``` is identical to T, result is value of type ```T```. If ```T``` is interface type and dynamic value of x is impleements T, result is value of type ```T```. In every other case run-time error occurs.
+
+3. If 
 ### 10. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
