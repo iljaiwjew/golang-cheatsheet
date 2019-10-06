@@ -180,6 +180,7 @@ x.(T) // x is of type I
 4. If ```T``` is not interface type and dynamic value from ```x``` is identical to ```T```, result is value of type ```T```.
 5. If ```T``` is interface type and type of dynamic value of x implements ```T```, result is value of type ```T```.
 6. In every other case run-time error occurs(e.g. if ```x``` is ```nil```, if ype of dynamic value of x doesn't implement ```T```)
+7. A type assertion used in the special form ```var v, ok = x.(T)``` prevents any panicking. The value of ```ok``` is ```true``` if the assertion is correct. Otherwise it is ```false``` and the value of ```v``` is the ```nil`` value for type T.
 ### 10. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
