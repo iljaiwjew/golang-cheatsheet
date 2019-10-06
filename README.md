@@ -178,10 +178,8 @@ x.(T) // x is of type I
 2. If ```I``` is not interface type the expression is invalid.
 3. If ```T``` is not interface type and ```T``` doesn't implement ```I``` the expression is invalid.
 4. If ```T``` is not interface type and dynamic value from ```x``` is identical to ```T```, result is value of type ```T```.
-5. If ```T``` is interface type and dynamic value of x implements ```T```, result is value of type ```T```.
+5. If ```T``` is interface type and type of dynamic value of x implements ```T```, result is value of type ```T```.
 6. In every other case run-time error occurs(e.g. if ```x``` is ```nil``` interface value run-time error occurs)
-
-6. If 
 ### 10. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
