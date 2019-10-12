@@ -181,7 +181,27 @@ x.(T) // x is of type I
 5. If ```T``` is interface type and type of dynamic value of x implements ```T```, result is value of type ```T```.
 6. In every other case run-time error occurs(e.g. if ```x``` is ```nil```, if ype of dynamic value of x doesn't implement ```T```)
 7. A type assertion used in the special form ```var v, ok = x.(T)``` prevents any panicking. The value of ```ok``` is ```true``` if the assertion is correct. Otherwise it is ```false``` and the value of ```v``` is the ```nil``` value for type T.
-### 10. Pointers
+### 10. Type switch
+```golang
+switch i := x.(type) { // The TypeSwitchGuard with a short variable declaration (1)
+    case nil:
+	printString("x is nil")                // type of i is type of x (interface{})
+    case int:
+	printInt(i)                            // type of i is int
+    case float64:
+	printFloat64(i)                        // type of i is float64
+    case func(int) float64:
+	printFunction(i)                       // type of i is func(int) float64
+    case bool, string:
+	printString("type is bool or string")  // type of i is type of x (interface{})
+    default:
+	printString("don't know the type")     // type of i is type of x (interface{})
+}
+```
+1. A type switch is switch that compares types rather than values. Cases match actual types T against the dynamic type of the expression x. The types listed in the cases of a type switch must all be different.
+2. The TypeSwitchGuard(1) may include a short variable declaration. When that form is used, the variable is declared in the implicit block of each clause. In clauses with a case listing exactly one type, the variable has that type; otherwise, the variable has the type of the expression in the TypeSwitchGuard.
+3. Instead of a type, a case may use the predeclared identifier ```nil```; that case is selected when the expression in the TypeSwitchGuard is a ```nil``` interface value. There may be at most one nil case.
+### 11. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
 type Pint *int
@@ -190,7 +210,7 @@ var x = 1
 var px *int = &x // type of px is *int. Base type of *int is int
 var mypx Pint = px // type of mypx is Pint. Base type of Pint is also int
 ```
-### 11. Functions
+### 12. Functions
 1. A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine:
 ```go
 func flushICache(begin, end uintptr)  // implemented externally
@@ -201,7 +221,7 @@ func flushICache(begin, end uintptr)  // implemented externally
 func(a, b int, z float64, opt ...interface{}) (success bool)
 ```
 If f is variadic with a final parameter p of type ...T, then within f the type of p is equivalent to type []T. If f is invoked with no actual arguments for p, the value passed to p is nil. Otherwise, the value passed is a new slice of type []T with a new underlying array whose successive elements are the actual arguments, which all must be assignable to T. The length and capacity of the slice is therefore the number of arguments bound to p and may differ for each call.
-### 12. Labels and break, continue, goto statements
+### 13. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -270,7 +290,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 13. Other
+### 14. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
