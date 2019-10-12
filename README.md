@@ -252,7 +252,7 @@ func f() (result int) {
 }
 ```
 ### 13. Handling panics
-1. ```recover``` function allows a program to manage behavior of a panicking goroutine. ```recover``` function allows a program to manage behavior of a panicking goroutine. Suppose a function ```G``` defers a function ```D``` that calls recover and a panic occurs in a function on the same goroutine in which ```G``` is executing. When the running of deferred functions reaches ```D```, the return value of ```D```'s call to recover will be the value passed to the call of panic. If ```D``` returns normally, without starting a new panic, the panicking sequence stops. In that case, the state of functions called between ```G``` and the call to panic is discarded(so, return value of ```G``` in this case will be default value for ```G``` return value type), and normal execution resumes. Any functions deferred by ```G``` before ```D``` are then run and ```G```'s execution terminates by returning to its caller:
+1. ```recover``` function allows a program to manage behavior of a panicking goroutine. Suppose a function ```G``` defers a function ```D``` that calls recover and a panic occurs in a function on the same goroutine in which ```G``` is executing. When the running of deferred functions reaches ```D```, the return value of ```D```'s call to recover will be the value passed to the call of panic. If ```D``` returns normally, without starting a new panic, the panicking sequence stops. In that case, the state of functions called between ```G``` and the call to panic is discarded(so, return value of ```G``` in this case will be default value for ```G``` return value type), and normal execution resumes. Any functions deferred by ```G``` before ```D``` are then run and ```G```'s execution terminates by returning to its caller:
 ```golang
 // input after execution this: 
 // recovered err: Example error
@@ -282,6 +282,12 @@ func main() {
 	var x = G()
 	fmt.Println("x:", x)
 }
+```
+2. The return value of recover is nil if any of the following conditions holds:
+```
+panic's argument was nil;
+the goroutine is not panicking;
+recover was not called directly by a deferred function.
 ```
 ### 14. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
