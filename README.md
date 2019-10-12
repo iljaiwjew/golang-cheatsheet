@@ -213,7 +213,11 @@ case T2:
     fmt.Println("T2", aux)
 }
 ```
-### 11. Pointers
+### 11. Channels
+1. The  the type of the value to be sent must be assignable to the channel's element type.
+2. A send on a closed channel proceeds by causing a run-time panic.
+3. A send on a nil channel blocks forever.
+### 12. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
 type Pint *int
@@ -222,7 +226,7 @@ var x = 1
 var px *int = &x // type of px is *int. Base type of *int is int
 var mypx Pint = px // type of mypx is Pint. Base type of Pint is also int
 ```
-### 12. Functions
+### 13. Functions
 1. A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine:
 ```go
 func flushICache(begin, end uintptr)  // implemented externally
@@ -233,7 +237,7 @@ func flushICache(begin, end uintptr)  // implemented externally
 func(a, b int, z float64, opt ...interface{}) (success bool)
 ```
 If f is variadic with a final parameter p of type ...T, then within f the type of p is equivalent to type []T. If f is invoked with no actual arguments for p, the value passed to p is nil. Otherwise, the value passed is a new slice of type []T with a new underlying array whose successive elements are the actual arguments, which all must be assignable to T. The length and capacity of the slice is therefore the number of arguments bound to p and may differ for each call.
-### 13. Labels and break, continue, goto statements
+### 14. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -302,7 +306,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 14. Other
+### 15. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
