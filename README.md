@@ -217,6 +217,9 @@ case T2:
 1. The  the type of the value to be sent must be assignable to the channel's element type.
 2. A send on a closed channel proceeds by causing a run-time panic.
 3. A send on a nil channel blocks forever.
+4. Sending to or closing a closed channel causes a run-time panic.
+5. It's not possible to call built-in ```close``` on receive-only channel(cause a compile error)
+6. 
 ### 12. Defer statement
 1. A ```defer``` statement invokes a function whose execution is deferred. Cases when ```defer``` invokes given function:
 ```
