@@ -4,6 +4,13 @@
 2. ```byte``` is alias for ```uint8```
 3. ```rune``` is alias for ```int32```
 4. ```int32``` and ```int``` are not the same type even though they may have the same size on a particular architecture.
+5. Default values:
+```
+false for booleans
+0 for numeric types
+"" for strings
+nil for pointers, functions, interfaces, slices, channels, and maps
+```
 ### 1. Type assignability
 ```golang
 var y T = x // x's type is V
