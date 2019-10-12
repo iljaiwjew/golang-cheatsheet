@@ -225,6 +225,10 @@ case T2:
   3. The surrounding function reached the end of its function body
   4. The corresponding goroutine is panicking
  ```
+ 2. The expression must be a function or method call
+ 3. Calls of built-in functions are restricted
+ 4. Each time a ```defer``` statement executes, the function value and parameters to the call are evaluated as usual and saved anew but the actual function is not invoked. Instead, deferred functions are invoked immediately before the surrounding function returns, in the reverse order they were deferred. That is, if the surrounding function returns through an explicit return statement, deferred functions are executed **after** any result parameters are set by that return statement but **before** the function returns to its caller.
+ 5.
 ### 13. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
