@@ -199,8 +199,20 @@ switch i := x.(type) { // The TypeSwitchGuard with a short variable declaration 
 }
 ```
 1. A type switch is switch that compares types rather than values. Cases match actual types T against the dynamic type of the expression x. The types listed in the cases of a type switch must all be different.
-2. The TypeSwitchGuard(1) may include a short variable declaration. When that form is used, the variable is declared in the implicit block of each clause. In clauses with a case listing exactly one type, the variable has that type; otherwise, the variable has the type of the expression in the TypeSwitchGuard.
+2. The TypeSwitchGuard (1) may include a short variable declaration. When that form is used, the variable is declared in the implicit block of each clause. In clauses with a case listing exactly one type, the variable has that type; otherwise, the variable has the type of the expression in the TypeSwitchGuard.
 3. Instead of a type, a case may use the predeclared identifier ```nil```; that case is selected when the expression in the TypeSwitchGuard is a ```nil``` interface value. There may be at most one nil case.
+4. The type switch guard may be preceded by a [simple statement](https://medium.com/golangspec/simple-statement-notion-in-go-b8afddfc7916), which executes before the guard is evaluated:
+```golang
+var v I1 = T1{}
+switch aux := 1; v.(type) {
+case nil:
+    fmt.Println("nil")
+case T1:
+    fmt.Println("T1", aux)
+case T2:
+    fmt.Println("T2", aux)
+}
+```
 ### 11. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
