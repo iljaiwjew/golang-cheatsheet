@@ -219,10 +219,10 @@ case T2:
 3. A send on a nil channel blocks forever.
 ### 12. Defer statement
 1. A ```defer``` statement invokes a function whose execution is deferred. Cases when ```defer``` invokes given function:
-  - The surrounding function returns
-  - The surrounding function executed a return statement
-  - The surrounding function reached the end of its function body
-  - The corresponding goroutine is panicking
+  \- The surrounding function returns
+  \- The surrounding function executed a return statement
+  \- The surrounding function reached the end of its function body
+  \- The corresponding goroutine is panicking
 ### 13. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
