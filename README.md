@@ -260,6 +260,7 @@ func flushICache(begin, end uintptr)  // implemented externally
 ```golang
 func(a, b int, z float64, opt ...interface{}) (success bool)
 ```
+4. The built-in functions do not have standard Go types, so they can only appear in call expressions; **they cannot be used as function values**.
 If f is variadic with a final parameter p of type ...T, then within f the type of p is equivalent to type []T. If f is invoked with no actual arguments for p, the value passed to p is nil. Otherwise, the value passed is a new slice of type []T with a new underlying array whose successive elements are the actual arguments, which all must be assignable to T. The length and capacity of the slice is therefore the number of arguments bound to p and may differ for each call.
 ### 15. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
