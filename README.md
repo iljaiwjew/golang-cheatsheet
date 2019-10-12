@@ -251,7 +251,39 @@ func f() (result int) {
 	return 6
 }
 ```
-### 13. Pointers
+### 13. Handling panics
+1. ```recover``` function allows a program to manage behavior of a panicking goroutine. ```recover``` function allows a program to manage behavior of a panicking goroutine. Suppose a function ```G``` defers a function ```D``` that calls recover and a panic occurs in a function on the same goroutine in which ```G``` is executing. When the running of deferred functions reaches ```D```, the return value of ```D```'s call to recover will be the value passed to the call of panic. If ```D``` returns normally, without starting a new panic, the panicking sequence stops. In that case, the state of functions called between ```G``` and the call to panic is discarded(so, return value of ```G``` in this case will be default value for ```G``` return value type), and normal execution resumes. Any functions deferred by ```G``` before ```D``` are then run and ```G```'s execution terminates by returning to its caller:
+```golang
+// input after execution this: 
+// recovered err: Example error
+// DD is called as usual
+// x: 0
+package main
+
+import "fmt"
+
+func DD() {
+	fmt.Println("DD is called as usual")
+}
+
+func D() {
+	var err = recover()
+	fmt.Println("recovered err:", err)
+}
+
+func G() int {
+	defer DD()
+	defer D()
+	panic("Example error")
+	return 10
+}
+
+func main() {
+	var x = G()
+	fmt.Println("x:", x)
+}
+```golang
+### 14. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
 type Pint *int
@@ -260,7 +292,7 @@ var x = 1
 var px *int = &x // type of px is *int. Base type of *int is int
 var mypx Pint = px // type of mypx is Pint. Base type of Pint is also int
 ```
-### 14. Functions
+### 15. Functions
 1. A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine:
 ```go
 func flushICache(begin, end uintptr)  // implemented externally
@@ -272,7 +304,7 @@ func(a, b int, z float64, opt ...interface{}) (success bool)
 ```
 4. The built-in functions do not have standard Go types, so they can only appear in call expressions; **they cannot be used as function values**.
 If f is variadic with a final parameter p of type ...T, then within f the type of p is equivalent to type []T. If f is invoked with no actual arguments for p, the value passed to p is nil. Otherwise, the value passed is a new slice of type []T with a new underlying array whose successive elements are the actual arguments, which all must be assignable to T. The length and capacity of the slice is therefore the number of arguments bound to p and may differ for each call.
-### 15. Labels and break, continue, goto statements
+### 16. Labels and break, continue, goto statements
 1. Labels can be used for *goto*, *break* and *continue* statements
 2. It’s optional for *break*, *continue* statements, but required for *goto*
 3. Label’s scope is full function body, not only lines that appears after label declaration:
@@ -341,7 +373,7 @@ Block:
     fmt.Println(v)
 }
 ```
-### 16. Other
+### 17. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
