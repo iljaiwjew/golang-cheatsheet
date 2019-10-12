@@ -282,7 +282,7 @@ func main() {
 	var x = G()
 	fmt.Println("x:", x)
 }
-```golang
+```
 ### 14. Pointers
 1. A pointer type denotes the set of all pointers to variables of a given type. This type called the base type of the pointer. Note that there are no any difference between pointer type and defined type that is made from pointer:
 ```go
