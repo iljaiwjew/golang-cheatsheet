@@ -401,6 +401,20 @@ var x = a
 var a, b = f() // a and b are initialized together, before x is initialized
 ```
 4. The declaration order of variables declared in multiple files is determined by the order in which the files are presented to the compiler: Variables declared in the first file are declared before any of the variables declared in the second file, and so on.
+5. Each package performs initialization only once, no matter how many times this package has been imported.
+6. Variables may also be initialized using functions named init declared in the package block, with no arguments and no result parameters.
+```golang
+func init() { … }
+```
+7. Multiple such functions may be defined per package, even within a single source file. In the package block, the init identifier can be used only to declare init functions, but the identifier itself is not declared. Thus init functions cannot be referred to from anywhere in a program.
+8. Order of initialization:
+```
+1. initialization of imported packages
+2. assigning initial values to all package-level variables
+3. Calling all init functions in the order they appear in the source, possibly in multiple files, as presented to the compiler.
+4. Package initialization—variable initialization and the invocation of init functions—happens in a single goroutine, sequentially, one package at a time. An init function may launch other goroutines, which can run concurrently with the initialization code. However, initialization always sequences the init functions: it will not invoke the next one until the previous one has returned.
+5.
+```
 ### 18. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
