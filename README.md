@@ -379,7 +379,29 @@ Block:
     fmt.Println(v)
 }
 ```
-### 17. Other
+### 17. Program initialization
+```golang
+var (
+	a = c + b  // == 9
+	b = f()    // == 4
+	c = f()    // == 5
+	d = 3      // == 5 after initialization has finished
+)
+
+func f() int {
+	d++
+	return d
+}
+```
+1. Package-level variable initialization run iteratively. Each iteration selects the variable earliest in declaration order **which has no dependencies on uninitialized variables**.
+2. If any variables are still uninitialized when package-level initialization ends that means that those variables are part of one or more initialization cycles, and the program is not valid.
+3. Multiple variables on the left-hand side of a variable declaration initialized by single (multi-valued) expression on the right-hand side are initialized together: If any of the variables on the left-hand side is initialized, all those variables are initialized in the same step:
+```golang
+var x = a
+var a, b = f() // a and b are initialized together, before x is initialized
+```
+4. The declaration order of variables declared in multiple files is determined by the order in which the files are presented to the compiler: Variables declared in the first file are declared before any of the variables declared in the second file, and so on.
+### 18. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
 3. Types can be recursive, but only with nested pointer types:
