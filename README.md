@@ -412,9 +412,8 @@ func init() { … }
 1. initialization of imported packages
 2. assigning initial values to all package-level variables
 3. Calling all init functions in the order they appear in the source, possibly in multiple files, as presented to the compiler.
-4. Package initialization—variable initialization and the invocation of init functions—happens in a single goroutine, sequentially, one package at a time. An init function may launch other goroutines, which can run concurrently with the initialization code. However, initialization always sequences the init functions: it will not invoke the next one until the previous one has returned.
-5.
 ```
+9. Package initialization—variable initialization and the invocation of init functions—happens in a single goroutine, sequentially, one package at a time. An init function may launch other goroutines, which can run concurrently with the initialization code. However, initialization always sequences the init functions: it will not invoke the next one until the previous one has returned.
 ### 18. Other
 1. Scope of importing packages is file block
 2. Identifiers has declared outside of any function are visible across the whole package (the scope is the package block)
